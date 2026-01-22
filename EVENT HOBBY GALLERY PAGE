@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobby Event Gallery</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <h1>Hobby Event Gallery</h1>
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="photography">Photography</button>
+        <button class="filter-btn" data-filter="crafts">Crafts</button>
+    </div>
+    <div class="gallery">
+        <img src="photo1.jpg" alt="Hiking Photo" data-category="photography">
+        <img src="craft1.jpg" alt="Craft Item" data-category="crafts">
+        <img src="photo2.jpg" alt="Sunset Photo" data-category="photography">
+        <!-- Add more images -->
+    </div>
+    <script src="gallery.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+.filters {
+    margin-bottom: 20px;
+}
+.filter-btn {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+}
+.filter-btn.active {
+    background: #4ecdc4;
+    color: white;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+img:hover {
+    transform: scale(1.05);
+}
+const filterButtons = document.querySelectorAll('.filter-btn');
+const images = document.querySelectorAll('.gallery img');
+
+filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        images.forEach(img => {
+            if (filter === 'all' || img.dataset.category === filter) {
+                img.style.display = 'block';
+            } else {
+                img.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Add lightbox functionality (simplified)
+images.forEach(img => {
+    img.addEventListener('click', () => {
+        // In a real app, open a modal with the full image
+        alert('Image clicked: ' + img.alt);
+    });
+});
