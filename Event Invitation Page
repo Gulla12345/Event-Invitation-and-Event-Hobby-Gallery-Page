@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Invitation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="invitation">
+        <h1>You're Invited to Our Annual Tech Meetup!</h1>
+        <p><strong>Date:</strong> October 15, 2023</p>
+        <p><strong>Time:</strong> 6:00 PM</p>
+        <p><strong>Location:</strong> Virtual (Zoom Link: [link])</p>
+        <img src="event-banner.jpg" alt="Event Banner">
+        <form id="rsvp-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <select id="attendance">
+                <option value="yes">Yes, I'll attend</option>
+                <option value="no">No, sorry</option>
+            </select>
+            <button type="submit">Submit RSVP</button>
+        </form>
+        <div id="response"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.invitation {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+form {
+    margin-top: 20px;
+}
+input, select, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+button {
+    background: #4ecdc4;
+    color: white;
+    cursor: pointer;
+}
+#response {
+    margin-top: 20px;
+    font-weight: bold;
+}
+document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const attendance = document.getElementById('attendance').value;
+    document.getElementById('response').textContent = `Thank you, ${name}! Your RSVP (${attendance}) has been recorded.`;
+    // In a real app, send data to backend via fetch() or Axios
+});
